@@ -1,46 +1,77 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 import code from './codesnip/code';
+import ButtonList from './Component/ButtonList';
+import List from './Component/List';
 const App = () => {
-  const List = ({meta},onClick) => {
-    console.log(meta,onClick)
-   const {id,shortcode,code} = meta
-    return(
-      <li className='list-group-item p-2'>
-        <div className='row container'>
-        <h5>{shortcode}</h5>
-        <div className='col-11' id = {'copy-'+id}>
-        {code}
-        </div>
-        <div className='col-1'>
-          <button className='btn btn-primary' onClick={() => onClick('copy-'+id)}>copy</button>
-        </div>
-        
-        </div></li>
-    )
+
+  const [data,setData] = useState([])
+  const [search,setSearch] = useState('')
+
+  
+  const handleSearch = (e) => {
+      console.log(e.target.value)
+    setSearch((s) => e.target.value)
   }
-const handlecopy = (id) => {
-  const copyText = document.getElementById(id);
+  const filterData = () => {
+    if(search === '') {
+      setData(f => code);
+    }
+    setData((d) => {
+      console.log('18',d)
+      return code.filter(c => c.shortcode.includes(search))
+    })
+  }
 
-  // Select the text field
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
+  useEffect(() => {
+    setData(() => code.filter(c => c.id < 6))
+  },[])
 
-   // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
+  const handleFilterByName = (v) => {
+    console.log(v)
+    if(v === 'clear')
+    {
+      setData(() => code.filter(c => c.id < 6))
 
-  // Alert the copied text
-  alert("Copied the text: " + copyText.value);
-}
+      }
+    else if(v === 'all')
+      {
+        setData(code)
+  
+        }
+        
+else {
+    setData((d) => {
+      console.log('18',d)
+      return code.filter(c => c.category === v)
+    })
+  }
+  }
 
 
   return (
-    <div className="container">
+    <>
+    <div className='p-1 border border-dark'>
+
     <h2> Code Snip </h2>
-     <ul className='list-group'>
-      {code.map(c => <List key ={c.id} meta = {c} onClick = {handlecopy}/>)}
+      <div className="container p-2 mx-auto">
+      <input className='w-70' onChange={handleSearch} value = {search} />
+      <button className='btn btn-success mx-3' onClick={filterData} ><small>Search</small></button>
+      </div>
+      <div>
+        <ButtonList code={code} handleFilterByName = {handleFilterByName} />
+
+      </div>
+      <br/>
+      <div className="container">
+     <ul className='list-group p-2'>
+      {data.map(c => <List key ={c.id} meta = {c}/>)}
      </ul>
     
     </div>
+    </div>
+  
+    </>
   );
 }
 
