@@ -28,6 +28,14 @@ const code = [
           (previousValue, currentValue) => previousValue + currentValue,
           initialValue
         );`
+    },
+    {
+        id:5,
+        category:'C++',
+        shortcode:"For",
+        code:` for(int i = 0; i < in.size(); i++) {
+
+        }`
     }
 ]
 

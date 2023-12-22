@@ -10,7 +10,7 @@ const App = () => {
 
   
   const handleSearch = (e) => {
-      console.log(e.target.value)
+      //console.log(e.target.value)
     setSearch((s) => e.target.value)
   }
   const filterData = () => {
@@ -18,7 +18,7 @@ const App = () => {
       setData(f => code);
     }
     setData((d) => {
-      console.log('18',d)
+      //console.log('18',d)
       return code.filter(c => c.shortcode.includes(search))
     })
   }
@@ -28,7 +28,7 @@ const App = () => {
   },[])
 
   const handleFilterByName = (v) => {
-    console.log(v)
+    //console.log(v)
     if(v === 'clear')
     {
       setData(() => code.filter(c => c.id < 6))
@@ -42,7 +42,7 @@ const App = () => {
         
 else {
     setData((d) => {
-      console.log('18',d)
+      //console.log('18',d)
       return code.filter(c => c.category === v)
     })
   }

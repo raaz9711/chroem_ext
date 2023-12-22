@@ -7,7 +7,7 @@ const List = ({meta}) => {
     })
 
    const {shortcode,code} = meta
-   console.log(meta)
+   //console.log(meta)
 
     const handlecopy = (i) => {
       const copyText = i;
