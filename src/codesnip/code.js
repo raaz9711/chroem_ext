@@ -37,6 +37,13 @@ const code = [
 
         }`
     }
+    //data:text/html, <html contenteditable>
+    ,{
+        id:6,
+        category:'MISC',
+        shortcode:"Edit in Chrome",
+        code:`data:text/html, <html contenteditable>`
+    }
 ]
 
 export default code
